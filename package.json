@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/kmuralidharrao/task-manager#readme",
   "dependencies": {
-    "mongodb": "^4.2.2"
+    "mongodb": "^4.2.2",
+    "mongoose": "^6.1.5",
+    "validator": "^13.7.0"
   }
 }
