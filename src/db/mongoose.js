@@ -39,19 +39,19 @@ const User = mongoose.model("User", {
   },
 });
 
-// const me = new User({
-//   name: " K Muralidhar Rao ",
-//   email: " Muralidharraok15@gmail.com",
-//   password: "muralidhar",
-// });
+const me = new User({
+  name: " K Muralidhar Rao ",
+  email: " Muralidharraok15@gmail.com",
+  password: "muralidhar",
+});
 
-// me.save()
-//   .then(() => {
-//     console.log(me);
-//   })
-//   .catch((error) => {
-//     console.log("Error ", error);
-//   });
+me.save()
+  .then(() => {
+    console.log(me);
+  })
+  .catch((error) => {
+    console.log("Error ", error);
+  });
 
 const Task = mongoose.model("Task", {
   description: { type: String, required: true, trim: true },
