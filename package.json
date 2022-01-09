@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/kmuralidharrao/task-manager#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.2.2",
     "mongoose": "^6.1.5",
     "validator": "^13.7.0"
