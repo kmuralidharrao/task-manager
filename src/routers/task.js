@@ -24,6 +24,12 @@ router.post("/tasks", auth, async (req, res) => {
   }
 });
 
+/* optional query parameter 
+      -completed : true/false
+      -limit : Number
+      -skip : Number
+      -sortBy: String
+*/
 router.get("/tasks", auth, async (req, res) => {
   /*
     Task.find({})
@@ -35,10 +41,43 @@ router.get("/tasks", auth, async (req, res) => {
       });
       */
   try {
+    const match = {};
+    if (req.query.completed) match.completed = req.query.completed === "true";
+
+    const sort = {};
+    if (req.query.sortBy) {
+      const parts = req.query.sortBy.split(":");
+      sort[parts[0]] = parts[1] === "desc" ? -1 : 1; // 1 for asc and -1 for desc
+    }
     //const tasks = await Task.find({});
-    await req.user.populate("tasks");
+
+    // await req.user.populate("tasks");
+
+    await req.user.populate({
+      path: "tasks",
+      match,
+      options: {
+        limit: parseInt(req.query.limit),
+        skip: parseInt(req.query.skip),
+        sort,
+      },
+    });
+
     // alternate way
-    // const tasks = await Task.find({ owner : req.user._id})
+    /*
+        const tasks = await Task.find(
+          {
+            owner: req.user._id,
+            completed: req.query.completed,
+          },
+          null,
+          {
+            limit: parseInt(req.query.limit),
+            skip: parseInt(req.query.skip),
+          }
+        );
+        res.send(tasks);
+    */
     res.send(req.user.tasks);
   } catch (error) {
     res.status(500).send();
